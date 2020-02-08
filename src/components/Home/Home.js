@@ -14,7 +14,7 @@ class BasicItem extends Component {
           backgroundColor: '#344955',
           margin: 20,
           borderRadius: 20,
-          elevation:5
+          elevation: 5,
         }}>
         <Card
           style={{
@@ -109,7 +109,7 @@ class BasicItem extends Component {
               flexDirection: 'row',
               justifyContent: 'flex-end',
               backgroundColor: '#4a6572',
-              borderRadius:20
+              borderRadius: 20,
             }}>
             <Button
               style={{
