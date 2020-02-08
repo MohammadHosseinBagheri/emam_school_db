@@ -1,8 +1,29 @@
 import React, {Component} from 'react';
-import {View, Text,} from 'react-native';
-import { Card, CardItem, Button} from 'native-base';
+import {View, Text, Linking} from 'react-native';
+import {Card, CardItem, Button} from 'native-base';
 
 export default class BasicItem extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      item: this.props.item,
+    };
+  }
+  fatherPress = () => {
+    let tell = this.state.item.father_mobile;
+    let phoneNumber = `tel:${tell}`;
+    Linking.openURL(phoneNumber);
+  };
+  mobilePress = () => {
+    let tell = this.state.item.mobile_phone;
+    let phoneNumber = `tel:${tell}`;
+    Linking.openURL(phoneNumber);
+  };
+  homePress = () => {
+    let tell = this.state.item.home_phone;
+    let phoneNumber = `tel:${tell}`;
+    Linking.openURL(phoneNumber);
+  };
   render() {
     const {item} = this.props;
     return (
@@ -54,6 +75,7 @@ export default class BasicItem extends Component {
               backgroundColor: '#4a6572',
             }}>
             <Button
+              onPress={this.mobilePress}
               style={{
                 backgroundColor: '#00E676',
                 width: 50,
@@ -82,6 +104,7 @@ export default class BasicItem extends Component {
               backgroundColor: '#4a6572',
             }}>
             <Button
+              onPress={this.homePress}
               style={{
                 backgroundColor: '#ff1744',
                 width: 50,
@@ -111,6 +134,7 @@ export default class BasicItem extends Component {
               borderRadius: 20,
             }}>
             <Button
+              onPress={this.fatherPress}
               style={{
                 backgroundColor: '#F9AA33',
                 width: 50,
