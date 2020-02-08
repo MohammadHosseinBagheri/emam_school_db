@@ -20,53 +20,54 @@ class Home extends Component {
     this.state = {
       student: '',
       data: [],
+      load: null,
     };
   }
+  _listEmptyComponent = () => {
+    return <View></View>;
+  };
   searchStudentInput = async text => {
     await this.setState({
       student: text,
     });
-    await this.executeSearchMethod();
+    //console.log(this.state.student);
+    if (this.state.student.length > 3) {
+      var testdata = await data.filter(student => {
+        //console.log(student)
+        if (student.mobile_phone.includes(this.state.student)) {
+          return student.mobile_phone.includes(this.state.student);
+        }
+        if (student.home_phone.includes(this.state.student)) {
+          return student.home_phone.includes(this.state.student);
+        }
+        if (student.father_mobile.includes(this.state.student)) {
+          return student.father_mobile.includes(this.state.student);
+        }
+        if (student.last_name.includes(this.state.student)) {
+          return student.last_name.includes(this.state.student);
+        }
+      });
+      await this.setState({
+        data: testdata,
+      });
+    }
+    if (this.state.student.length <= 3) {
+      this.setState({
+        data: [],
+      });
+    }
+
+    //console.log(testdata);
   };
-  executeSearchMethod = async () => {
-    const student = await this.state.student;
-    await data.map(item => {
-      if (item.home_phone.includes(student)) {
-        this.setState({
-          data: item,
-        });
-        console.log(this.state.data);
-        return;
-      }
-      if (item.father_mobile.includes(student)) {
-        this.setState({
-          data: item,
-        });
-        console.log(this.state.data);
-        return;
-      }
-      if (item.mobile_phone.includes(student)) {
-        this.setState({
-          data: item,
-        });
-        console.log(this.state.data);
-        return;
-      }
-      if (item.last_name.includes(student)) {
-        this.setState({
-          data: item,
-        });
-        console.log(this.state.data);
-        return;
-      }
-      if (this.state.student === '') {
-        this.setState({
-          data: [],
-        });
-        console.log(this.state.data);
-        return;
-      }
-    });
+  renderData = item => {
+    const {id} = item;
+    for (let i = 0; i < this.state.data.length; i++) {
+      return (
+        <View style={{margin: 10}}>
+          <Text> {id} </Text>
+        </View>
+      );
+    }
   };
   render() {
     return (
@@ -81,14 +82,14 @@ class Home extends Component {
             />
           </Item>
         </View>
-
-        {/* <FlatList
-          data={data}
+        <FlatList
+          data={this.state.data}
+          ListEmptyComponent={this._listEmptyComponent}
           renderItem={({item, index}) => {
             return <BasicItem item={item} index={index} />;
           }}
           refreshing
-        /> */}
+        />
       </View>
     );
   }
