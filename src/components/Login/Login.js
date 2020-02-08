@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {View, Text} from 'react-native';
 import {Item, Input, Button} from 'native-base';
+import ALertModal from '../AlertModal/ALertModal';
 class Login extends Component {
   constructor(props) {
     super(props);
@@ -8,7 +9,9 @@ class Login extends Component {
       password: '',
     };
   }
-
+  onOpen = () => {
+    this.refs.alert.open();
+  };
   changePassword = text => {
     this.setState({
       password: text,
@@ -16,7 +19,7 @@ class Login extends Component {
   };
   login = () => {
     if (this.state.password != 4640) {
-      alert('رمز عبور اشتباه است');
+      this.onOpen()
       return;
     } else {
       this.props.navigation.replace('HomeScreen');
@@ -24,7 +27,7 @@ class Login extends Component {
   };
   render() {
     return (
-      <View style={{flex: 1, backgroundColor: '#232F34'}}>
+      <View style={{flex: 1, backgroundColor: '#232F34',zIndex:1}}>
         <Text
           style={{
             fontFamily: 'IRANSansMobile_Bold',
@@ -37,8 +40,11 @@ class Login extends Component {
             paddingBottom: 10,
             borderBottomColor: '#F9AA33',
           }}>
-          مدیریت دبیرستان امام
+          اطلاعات دانش آموزان 
+          {'\n'}
+          دبیرستان امام حسین ع 
         </Text>
+        
 
         <View
           style={{
@@ -73,10 +79,12 @@ class Login extends Component {
               justifyContent: 'center',
               alignItems: 'center',
               flex: 1,
+              zIndex:1,
             }}>
             <Button
               onPress={this.login}
               style={{
+                zIndex:1,
                 justifyContent: 'center',
                 width: 150,
                 backgroundColor: '#F9AA33',
@@ -104,6 +112,7 @@ class Login extends Component {
             </Button>
           </View>
         </View>
+        <ALertModal ref={'alert'} />
       </View>
     );
   }
