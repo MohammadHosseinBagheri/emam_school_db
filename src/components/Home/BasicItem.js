@@ -26,6 +26,21 @@ export default class BasicItem extends Component {
   };
   render() {
     const {item} = this.props;
+    var classId;
+    if (item.klass_id == 1) {
+      classId = 'دهم ریاضی';
+    } else if (item.klass_id == 2) {
+      classId = 'دهم تجربی';
+    } else if (item.klass_id == 3) {
+      classId = 'یازدهم ریاضی';
+    } else if (item.klass_id == 4) {
+      classId = 'یازدهم تجربی';
+    } else if (item.klass_id == 5) {
+      classId = 'دوازدهم ریاضی';
+    } else {
+      classId = 'دوازدهم تجربی';
+    }
+
     return (
       <View
         style={{
@@ -65,6 +80,8 @@ export default class BasicItem extends Component {
               نام : {item.first_name}
               {'\n'}
               نام خانوادگی : {item.last_name}
+              {'\n'}
+              کلاس : {classId}
             </Text>
           </CardItem>
           <CardItem

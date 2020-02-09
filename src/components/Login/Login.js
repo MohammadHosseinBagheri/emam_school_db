@@ -49,7 +49,7 @@ class Login extends Component {
         <View
           style={{
             margin: 20,
-            flex: 1,
+            height:500
           }}>
           <Item
             style={{
@@ -78,8 +78,8 @@ class Login extends Component {
             style={{
               justifyContent: 'center',
               alignItems: 'center',
-              flex: 1,
               zIndex:1,
+              margin:100
             }}>
             <Button
               onPress={this.login}
